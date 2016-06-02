@@ -126,11 +126,9 @@ class AdminController extends Controller
             $participation->Event_id = $request->Event_id; 
             $participation->Department_id = 1;
             $participation->Rating = 0;
-    
-
-            $participation->save();
             //$Requests->delete();
-            
+            $participation->save();
+            $Request_delete = DB::table('Waiting_for_joining_event')->where('Volunteer_id','=',$volunteer_id)->delete();   
             return redirect('volunteerRequests');
         }
     }

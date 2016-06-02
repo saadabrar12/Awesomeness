@@ -14,6 +14,7 @@
 
 		<th> Ongoing </th>
 		<th> Action </th>
+		<th> Volunteer List </th>
 		
 		<tbody>
 			@foreach($Events as $Event)
@@ -66,6 +67,14 @@
 					</button>
 				</form>
 				
+				</td>
+				<td>
+					<form action="{{url('/').'/Events/'.$Event->Event_id.'/volunteerList'}}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" name="submitLogin" class="btn btn-default" >
+							Show Volunteer List
+						</button>
+					</form>
 				</td>
 			</tr>
 			@endforeach

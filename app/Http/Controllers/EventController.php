@@ -10,7 +10,13 @@ use App\Event_type;
 
 use App\Events;
 
+use App\Participation;
+
 use DB;
+
+use App\users;
+
+use App\Department;
 
 class EventController extends Controller
 {
@@ -19,15 +25,21 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_event_type_name($Event_type_name){
-        $Event_id_array = DB::table('Event_type')->where('Event_name','=',$Event_type_name)->get();
 
-//        dd($Event_id_array);
-        
-        foreach ($Event_id_array as $Event_type_id) {
-            //dd($Event_type_id);
-            return $event->Event_type_id = $Event_type_id->Event_type_id;
-        }
+    public function showEventVolunteers($event_id){
+        $Event_id1 = Events::find($event_id)->Event_id; 
+        $participants = DB::table('Participation')->where('Event_id','=',$Event_id1)->get();
+        return view('Events.showEventVolunteers',['Events'=>Events::find($event_id),'Event_types'=>Event_type::all(),'Users'=>users::all(),'Req'=>$participants]);
+    }
+    
+    public function Allocation($volunteer_id,$event_id){
+        //return 1;
+        $participants = DB::table('Participation')->where([
+                ['Volunteer_id',$volunteer_id],
+                ['Event_id',$event_id],
+        ])->get();
+        $member = DB::table('users')->where('User_type','=','1')->get();
+        return view('Events.Allocation',['participant'=>$participants,'Department'=>Department::all(),'Members'=>$member]);
     }
 
     public function index()

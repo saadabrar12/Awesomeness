@@ -42,6 +42,9 @@ Route::group(['middleware' => ['web']],function(){
 
 	Route::get('/memberrequests','AdminController@showMembershipRequests');
 	Route::get('/volunteerRequests','AdminController@showVolunteeringRequests');
+
+	Route::get('/Events/{event_id}/volunteerList','EventController@showEventVolunteers');
+	Route::get('/Events/{event_id}/{volunteer_id}/Allocation','EventController@Allocation');
 	
 	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
 
