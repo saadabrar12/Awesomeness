@@ -4,35 +4,47 @@
 
 @section('Contents')
 <center>
-	<form class="form-horizontal" action="" method="POST">
+	<form class="form-horizontal" action="{{url('/Events').'/'.$Event.'/'.$Volunteer.'/postAllocation' }}" method="POST">
 <fieldset>
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <!-- Form Name -->
-<legend>Allocate Volunteer  </legend>
-
+<legend>
+Volunteer Name: 
+@foreach($participant as $par)
+	@foreach($Users as $user)
+		@if($user->id == $par->Volunteer_id)
+			{{  $user->name }}
+		@endif
+	@endforeach
+@endforeach
+</legend>
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Members">Members</label>
   <div class="col-md-4">
-  @foreach($Members as $member)
+  
     <select id="Members" name="Members" class="form-control">
+    @foreach($Members as $member)
     @if($member->name)
-      <option value="{{ $member->name }}">{{ $member->name }}</option>
-    </select>
-    @endif
+      <option value="{{ $member->id }}">{{ $member->name }} </option>
+     @endif
   @endforeach
+    </select>
+   
   </div>
 </div>
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Department">Department</label>
   <div class="col-md-4">
-  @foreach($Department as $dep)
+  
     <select id="Department" name="Department" class="form-control">
+    @foreach($Department as $dep)
       <option value="{{ $dep->Department_name }}">{{ $dep->Department_name }}</option>
+    @endforeach
     </select>
-  @endforeach
+  
   </div>
 </div>
 

@@ -8,11 +8,8 @@
 <center>
 
 <legend>
-@foreach($Event_types as $Event_type)
-	@if($Events->Event_type_id == $Event_type->Event_type_id)
-		{{  $Event_type->Event_name }}
-	@endif
-@endforeach
+	Volunteers working under 
+	{{ Auth::user()->name }}
 </legend>
 
 	
@@ -24,13 +21,15 @@
 		<th> Date_of_birth </th>
 		<th>  Phone Number</th>
 		<th> Email Address </th>
+		<th> Event Name</th>
+		<th> Event Version </th>
 		<th> Action </th>
 		
 		<tbody>
-			@foreach($Req as $req)
+			@foreach($Participants as $par)
 			<tr>
 				@foreach($Users as $User)
-				@if($User->id == $req->Volunteer_id)
+				@if($User->id == $par->Volunteer_id)
 					<td>{{ $User->id }}</td>
 					<td> {{ $User->name }}</td>
 					<td> {{  $User->First_name }}</td>
@@ -49,20 +48,30 @@
 				@endif
 				@endforeach
 
-				
+				@foreach($Events as $event)
+					@if($event->Event_id == $par->Event_id)
 					<td>
-					<form action="{{ url('/').'/Events/'.$Events->Event_id.'/'.$req->Volunteer_id.'/Allocation' }}">
+						@foreach($Event_type as $event_type)
+							@if($event->Event_type_id == $event_type->Event_type_id)
+								{{  $event_type->Event_name }}
+
+							@endif
+						@endforeach
+					</td>
+					<td>
+						{{ $event->Event_name }}
+					</td>
+					@endif
+				@endforeach
+
+					<td>
+					<form action="">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<button type="submit" name="submitLogin" class="btn btn-default" method="GET" >
-							Allocate Departments and Supervisor
+							Rate		
 						</button>
 					</form>
-					<form action="{{ url('/').'/Events/'.$Events->Event_id.'/'.$req->Volunteer_id.'/disapprove' }}"  method="POST">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="submitLogin" class="btn btn-default" method="POST">
-	    					Sack 
-	    				</button>
-					</form>
+					
 					</td>
 				
 			</tr>

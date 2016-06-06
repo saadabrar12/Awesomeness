@@ -25,8 +25,7 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/',function(){
 		return view('Main');
 	});
-
-	Route::get('/Events/AllEvents','EventController@showAllEvents');	
+	Route::get('/Events/AllEvents','EventController@showAllEvents');
 
 	Route::resource('Users','UsersController');
 	Route::resource('Events','EventController');
@@ -44,7 +43,13 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/volunteerRequests','AdminController@showVolunteeringRequests');
 
 	Route::get('/Events/{event_id}/volunteerList','EventController@showEventVolunteers');
+		
 	Route::get('/Events/{event_id}/{volunteer_id}/Allocation','EventController@Allocation');
+	Route::post('/Events/{event_id}/{volunteer_id}/postAllocation','EventController@postAllocation');
+	Route::post('/Events/{event_id}/{volunteer_id}/disapprove','EventController@disapprove');
+
+	Route::get('/member/{id}/showVolunteersUnderMe','UsersController@showVolunteersUnderMe');
+	Route::get('/Events/{event_id}/{volunteer_id}/Rate','EventController@Rate');
 	
 	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
 

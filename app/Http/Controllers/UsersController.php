@@ -10,7 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Waiting_for_aprroval;
 
+use App\Event_type;
+
+use App\Events;
+
+use App\users;
+
+use App\Participation;
+
+use DB;
+
 use Session;
+
 
 class UsersController extends Controller
 {
@@ -19,6 +30,23 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function showVolunteersUnderMe($id){
+        $participation = new Participation;
+        //dd($id);
+        $VolunteersWorkingUnderMe = DB::table('Participation')
+                                ->where('Supervisor_id','=',$id)->get();
+        //dd($VolunteersWorkingUnderMe);
+        return view('Users.RateVolunteers',[
+                'Participants'=>$VolunteersWorkingUnderMe,
+                'Event_type' => Event_type::all(),
+                'Events' => Events::all(),
+                'Users'=>users::all()
+            ]);
+        //return 'something';
+
+    }
+
     public function getMain(){
         return view('Main');
     }

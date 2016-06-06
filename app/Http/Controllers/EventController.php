@@ -29,18 +29,54 @@ class EventController extends Controller
     public function showEventVolunteers($event_id){
         $Event_id1 = Events::find($event_id)->Event_id; 
         $participants = DB::table('Participation')->where('Event_id','=',$Event_id1)->get();
+
+        //dd($participants);
         return view('Events.showEventVolunteers',['Events'=>Events::find($event_id),'Event_types'=>Event_type::all(),'Users'=>users::all(),'Req'=>$participants]);
     }
     
-    public function Allocation($volunteer_id,$event_id){
+    public function Allocation($event_id,$volunteer_id){
         //return 1;
+        //dd($volunteer_id);
         $participants = DB::table('Participation')->where([
-                ['Volunteer_id',$volunteer_id],
-                ['Event_id',$event_id],
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
         ])->get();
+        
+        //dd($participants);
         $member = DB::table('users')->where('User_type','=','1')->get();
-        return view('Events.Allocation',['participant'=>$participants,'Department'=>Department::all(),'Members'=>$member]);
+        
+        return view('Events.Allocation',['participant'=>$participants,'Department'=>Department::all(),'Members'=>$member,'Users'=>users::all(),'Event'=>$event_id,'Volunteer'=>$volunteer_id]);
     }
+
+    public function postAllocation($event_id, $volunteer_id,Request $request){
+        $member_id= $request->get('Members');
+        $Department_name = $request->get('Department');
+
+        //dd($member_name);
+        //$Member_name = DB::table('users')
+
+        $Dept_name = DB::table('Department')->where('Department_name','=',$Department_name)->get();
+        //dd($Dept_name);
+        
+        foreach ($Dept_name as $dept_row) {
+            DB::table('Participation')
+                ->where('Volunteer_id',$volunteer_id)
+                ->update(['Department_id' => $dept_row->Department_id,'Supervisor_id'=>$member_id]);
+        
+            return redirect('/Events/AllEvents');
+        }
+
+    }
+
+    public function disapprove($event_id, $volunteer_id){
+        $deletedRows = Participation::where([
+            ['Volunteer_id', $volunteer_id],
+            ['Event_id',$event_id],
+            ])->delete();
+        
+            return redirect('/Events/AllEvents');
+    }
+
 
     public function index()
     {
