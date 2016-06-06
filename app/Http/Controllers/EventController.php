@@ -184,7 +184,18 @@ class EventController extends Controller
         $event->Ongoing = $request->get('Ongoing');
         $event->Venue = $request->get('Venue');
 
-        $event->save();
+        DB::table('Events')
+            ->where('Event_id',$id)
+            ->update([
+                'Event_type_id' => $event->Event_type_id,
+                'Event_date'=>$event->Event_date,
+                'Donations'=>$event->Donations,
+                'Event_name'=>$event->Event_name,
+                'Ongoing'=>$event->Ongoing,
+                'Venue'=>$event->Venue
+            ]);
+
+        //$event->save();
         return redirect('/Events/AllEvents')->with('info','Updated');
         
     }
