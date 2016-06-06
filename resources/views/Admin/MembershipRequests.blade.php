@@ -6,14 +6,14 @@
 
 @if(Auth::user()->User_type == 1)
 <center>
-	<legend>Pending Membership Requests</legend>
+	<legend>Pending Requests</legend>
 	<table cellpadding="5" cellspacing="0" border="1">
-		<th> Requested Member Id</th>
+		<th> Requested User Id</th>
 		<th> Name </th>
 		<th> First Name</th>
 		<th>  Last name </th>
 		<th>  Date of Birth </th>
-
+		<th> User Type </th>
 		<th> Phone Number </th>
 		<th> Email Address </th>
 		<th> Campus Name </th>
@@ -30,6 +30,13 @@
 				</td>
 				<td>
 					{{ $req->Date_of_birth }}
+				</td>
+				<td>
+					@if($req->User_type == 1)
+						Member
+					@else
+						Volunteer
+					@endif
 				</td>
 				<td>
 					{{ $req->Phone_number }}

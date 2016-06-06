@@ -196,8 +196,7 @@ class EventController extends Controller
             ]);
 
         //$event->save();
-        return redirect('/Events/AllEvents')->with('info','Updated');
-        
+        return redirect('/Events/AllEvents')->with('info','Updated');   
     }
 
     /**

@@ -35,7 +35,7 @@ class UsersController extends Controller
         $participation = new Participation;
         //dd($id);
         $VolunteersWorkingUnderMe = DB::table('Participation')
-                                ->where('Supervisor_id','=',$id)->get();
+            ->where('Supervisor_id','=',$id)->get();
         //dd($VolunteersWorkingUnderMe);
         return view('Users.RateVolunteers',[
                 'Participants'=>$VolunteersWorkingUnderMe,
@@ -44,7 +44,16 @@ class UsersController extends Controller
                 'Users'=>users::all()
             ]);
         //return 'something';
+    }
 
+    public function Rate($event_id, $volunteer_id){
+        $Participant = Participation::where([
+            ['Volunteer_id', $volunteer_id],
+            ['Event_id',$event_id],
+            ])->get();
+        dd($Participant);
+        
+        return view('Users.Rate');
     }
 
     public function getMain(){
@@ -93,7 +102,7 @@ class UsersController extends Controller
         $temporary_user->Phone_number = $request->get('Phone_number');
         $temporary_user->Email_address = $request->get('Email_address');
         $temporary_user->Campus_name = $request->get('Campus_name'); 
-
+        
         $temporary_user->save();
 
         return redirect('/Users/create')->with('info', 'it is empty');
