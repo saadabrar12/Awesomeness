@@ -15,12 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/cosmo/bootsrap.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/TableCSSCode.css') }}">
-    <script type="text/javascript">
-function openModal() {
-    $('#myModal').modal('show');
-}
-</script>
-
+  
   </head>
   <body>
        <div class="container-fluid">
@@ -86,14 +81,14 @@ function openModal() {
                           <div>
                           <ul class="nav nav-tabs">
                                       <li class="dropdown pull-right">
-                                             <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 20px" ><b>{{ Auth::user()->name }} <strong class="caret"></strong> </b>
+                                      <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 20px" ><b>{{ Auth::user()->name }} <strong class="caret"></strong> </b>
                                              </a>
 
                                              <ul class="dropdown-menu" role="menu">
                                                   <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                                   <li>
-                                    <a href="#">Action</a>
-                                  </li>
+                                                  <a href="#">Action</a>
+                                                  </li>
                                              </ul>
                                           </li>
                                     </ul>
@@ -165,7 +160,7 @@ function openModal() {
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a href="{{ url('/memberrequests') }}">Membership Requests</a>
+                        <a href="{{ url('/memberrequests') }}">Account Requests</a>
                       </li>
                       <li>
                         <a href="{{ url('/volunteerRequests') }}">Volunteer Requests</a>
@@ -228,10 +223,11 @@ function openModal() {
             @yield('Extra_info')
         </div>
     </div>
-       <script src="js/scripts.js"/>
+
    
     
-  <script src="JavaScript/jquery.js" />
-<script src="JavaScript/bootstrap-min.js" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">  
   </body>
 </html>
