@@ -10,10 +10,6 @@ use App\Event_type;
 
 use App\Events;
 
-<<<<<<< HEAD
-use DB;
-
-=======
 use App\Participation;
 
 use DB;
@@ -22,7 +18,6 @@ use App\users;
 
 use App\Department;
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 class EventController extends Controller
 {
     /**
@@ -30,19 +25,6 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function get_event_type_name($Event_type_name){
-        $Event_id_array = DB::table('Event_type')->where('Event_name','=',$Event_type_name)->get();
-
-//        dd($Event_id_array);
-        
-        foreach ($Event_id_array as $Event_type_id) {
-            //dd($Event_type_id);
-            return $event->Event_type_id = $Event_type_id->Event_type_id;
-        }
-    }
-
-=======
 
     public function showEventVolunteers($event_id){
         $Event_id1 = Events::find($event_id)->Event_id; 
@@ -96,7 +78,6 @@ class EventController extends Controller
     }
 
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     public function index()
     {
         return view('Events.EventHome');
@@ -203,11 +184,6 @@ class EventController extends Controller
         $event->Ongoing = $request->get('Ongoing');
         $event->Venue = $request->get('Venue');
 
-<<<<<<< HEAD
-        $event->save();
-        return redirect('/Events/AllEvents')->with('info','Updated');
-        
-=======
         DB::table('Events')
             ->where('Event_id',$id)
             ->update([
@@ -221,7 +197,6 @@ class EventController extends Controller
 
         //$event->save();
         return redirect('/Events/AllEvents')->with('info','Updated');   
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     }
 
     /**

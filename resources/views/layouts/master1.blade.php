@@ -228,8 +228,10 @@ function openModal() {
             @yield('Extra_info')
         </div>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
+       <script src="js/scripts.js"/>
+   
+    
+  <script src="JavaScript/jquery.js" />
+<script src="JavaScript/bootstrap-min.js" />
   </body>
 </html>

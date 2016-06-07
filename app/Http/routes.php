@@ -13,10 +13,7 @@
 use Illuminate\Support\Facades\Input;
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 Route::group(['middleware' => ['web']],function(){
 
 
@@ -28,14 +25,7 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/',function(){
 		return view('Main');
 	});
-<<<<<<< HEAD
-
-	Route::get('/Events/AllEvents','EventController@showAllEvents');	
-
-	
-=======
 	Route::get('/Events/AllEvents','EventController@showAllEvents');
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 
 	Route::resource('Users','UsersController');
 	Route::resource('Events','EventController');
@@ -50,16 +40,6 @@ Route::group(['middleware' => ['web']],function(){
 	});
 
 	Route::get('/memberrequests','AdminController@showMembershipRequests');
-<<<<<<< HEAD
-	
-	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
-	
-	Route::post('/Admin/{id}/disapprove','AdminController@rejectMembership');
-
-	
-
-	Route::get('test', function(){return view('test');});
-=======
 	Route::get('/volunteerRequests','AdminController@showVolunteeringRequests');
 
 	Route::get('/Events/{event_id}/volunteerList','EventController@showEventVolunteers');
@@ -85,7 +65,6 @@ Route::group(['middleware' => ['web']],function(){
 	
 
 	//Route::get('test', function(){return view('test');});
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 	
 
 	

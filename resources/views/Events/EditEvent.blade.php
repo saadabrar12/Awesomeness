@@ -10,26 +10,13 @@
 <input type="hidden" name="_method" value="PUT">
 
 <!-- Form Name -->
-<<<<<<< HEAD
-<legend>Create New Event</legend>
-=======
 <legend>Edit New Event</legend>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Event Type">Event Type</label>
   <div class="col-md-4">
 
-<<<<<<< HEAD
-  @foreach($Event_type as $event_type)
-    <select id="Event_Type" name="Event_Type" class="form-control">
-    @if($Events->Event_type_id == $event_type->Event_type_id)
-      <option value="{{ $event_type->Event_name }}">{{ $event_type->Event_name }}</option>
-    </select>
-    @endif
-  @endforeach
-=======
   
     <select id="Event_Type" name="Event_Type" class="form-control">
   @foreach($Event_type as $event_type)
@@ -40,7 +27,6 @@
     </select>
     
   
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
   </div>
 </div>
 

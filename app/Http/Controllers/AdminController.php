@@ -16,10 +16,6 @@ use App\Volunteers;
 
 use App\Campus;
 
-<<<<<<< HEAD
-use App\Event_type;
-
-=======
 use App\Events;
 
 use App\Event_type;
@@ -28,7 +24,6 @@ use App\Waiting_for_joining_Event;
 
 use App\Participation;
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 use DB;
 
 class AdminController extends Controller
@@ -113,8 +108,6 @@ class AdminController extends Controller
     	return redirect('memberrequests');
     }
 
-<<<<<<< HEAD
-=======
     public function showVolunteeringRequests(){
         return view('Admin.VolunteerRequests',['Req'=>Waiting_for_joining_Event::all(),'Events'=>Events::all(),'Event_types'=>Event_type::all(),'Users'=>users::all()]);
     }
@@ -139,5 +132,4 @@ class AdminController extends Controller
             return redirect('volunteerRequests');
         }
     }
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 }

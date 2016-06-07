@@ -8,13 +8,6 @@ use App\Http\Requests;
 
 use App\Events;
 
-<<<<<<< HEAD
-class Volunteer_Controller extends Controller
-{
-    public function showOngoingEvents(){
-    	
-    }
-=======
 use App\Event_type;
 
 use App\Waiting_for_joining_Event;
@@ -50,5 +43,4 @@ class Volunteer_Controller extends Controller
         }
     }
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 }

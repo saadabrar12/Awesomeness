@@ -14,10 +14,7 @@
 
 		<th> Ongoing </th>
 		<th> Action </th>
-<<<<<<< HEAD
-=======
 		<th> Volunteer List </th>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 		
 		<tbody>
 			@foreach($Events as $Event)
@@ -71,8 +68,6 @@
 				</form>
 				
 				</td>
-<<<<<<< HEAD
-=======
 				<td>
 					<form action="{{url('/').'/Events/'.$Event->Event_id.'/volunteerList'}}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -81,7 +76,6 @@
 						</button>
 					</form>
 				</td>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 			</tr>
 			@endforeach
 		</tbody>

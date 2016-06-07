@@ -3,14 +3,26 @@
 @section('title','Sign Up')
 
 @section('Contents')
+	@if (count($errors) > 0)
+	<?php echo "error!" ?>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-<<<<<<< HEAD
-	@if(session()->has('info'))
-		SUCCESS!
-=======
 	@if($info == 'Failed')
-		openmodal();
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
+		
+
+<a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
+		<script>
+			jQuery.noConflict(); 
+              $('#myModal').modal(show);
+         	
+    </script>
 	@endif
 
 		<div class="col-md-1">
@@ -114,11 +126,7 @@
 					<div class="form-group">
 					  <label class="col-md-4 control-label" for=""></label>
 					  <div class="col-md-4">
-<<<<<<< HEAD
-					    <button id="" name="" class="btn btn-info" type="submit">Sign Up</button>
-=======
 					    <button id="" name="button" class="btn btn-info" type="submit">Sign Up</button>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 					  </div>
 					</div>
 
@@ -128,9 +136,7 @@
 		</div>
 		<div class="col-md-1">
 		</div>
-<<<<<<< HEAD
-=======
-		<div id="myModal" class="modal fade" role="dialog">
+		<div id="myModal" class="modal hide fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -149,6 +155,5 @@
 
   </div>
 </div>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 		
 @stop

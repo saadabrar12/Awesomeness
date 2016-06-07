@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Support\Facades\Input;
+
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\MessageBag;
+
+use App\Http\Controllers\Controller;
+
 use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 
 use App\Waiting_for_aprroval;
 
-<<<<<<< HEAD
-use Session;
-
-=======
 use App\Event_type;
 
 use App\Events;
@@ -29,7 +35,6 @@ use DB;
 use Session;
 
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 class UsersController extends Controller
 {
     /**
@@ -37,8 +42,6 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-=======
 
     public function showVolunteersUnderMe($id){
         $participation = new Participation;
@@ -136,7 +139,6 @@ class UsersController extends Controller
         //dd($Rate);
         return redirect('/');
     }
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     public function getMain(){
         return view('Main');
     }
@@ -153,11 +155,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        return view('Users.create');
-=======
         return view('Users.create',['info'=>'Nothing']);
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     }
 
     /**
@@ -168,6 +166,26 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        
+         $validator = Validator::make($request->all(), [
+        'Username' => 'required|between:5,20',
+        'Password'=> 'required|alpha_dash|min: 6',
+        'First_name'=>'required|alpha',
+        'Last_name' => 'required|alpha',
+        'Date_of_birth' => 'required|date|before: ' . date('2003-1-1') . '|date_format:Y-m-d|after: ' .date('1980-1-1') . '| date_format: Y-m-d',
+
+        'Phone_number' => 'required|numeric|min: 11',
+        'Email_address' => 'required|email',
+        'Campus_name' => 'required|alpha'
+        //. date('Y-m-d') . '|date_format:Y-m-d',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/Users/create')
+            ->withInput()
+            ->withErrors($validator);
+    }
+        
         $temporary_user = new Waiting_for_aprroval;
         
         $var = $request->get('radios');
@@ -179,8 +197,6 @@ class UsersController extends Controller
         }
 
         $temporary_user->Username = $request->get('Username');
-<<<<<<< HEAD
-=======
         //Handling Username
         $user_name_check_row = users::all();
         foreach ($user_name_check_row as $user) {
@@ -191,7 +207,6 @@ class UsersController extends Controller
         }
 
 
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
         //return $request->get('password');
         $temporary_user->Password = \Hash::make($request->get('password'));
         $temporary_user->First_name = $request->get('First_name');
@@ -203,12 +218,7 @@ class UsersController extends Controller
 
         $temporary_user->save();
 
-<<<<<<< HEAD
-        return redirect('/Users/create')->with('info', 'it is empty');
-=======
         return view('Users.create',['info'=>'Successful']);
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
-
 
     }
 
