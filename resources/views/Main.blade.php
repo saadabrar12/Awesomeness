@@ -4,6 +4,11 @@
 
 
 @section('Contents')
+	@if($info == 'LoginFailed')
+			Login Failed
+	@endif
+	
+	
 	<div id="myCarousel" class="carousel slide" data-ride="carousel" >
   <!-- Indicators -->
   		<ol class="carousel-indicators">

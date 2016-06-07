@@ -1,5 +1,9 @@
 @extends('layouts.master1')
-
+<script type="text/javascript">
+function openModal() {
+    $('#myModal').modal('show');
+}
+</script>
 @section('title','Sign Up')
 
 @section('Contents')
@@ -14,7 +18,7 @@
     </div>
 @endif
 
-	@if($info == 'Failed')
+<!--	@if($info == 'Failed')
 		
 
 <a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
@@ -23,8 +27,14 @@
               $('#myModal').modal(show);
          	
     </script>
-	@endif
-
+-->
+	@if($info == 'Failed')
+		<center>
+		<div class="alert alert-warning">
+ 		 <strong>Warning!</strong> User name Already Exists. Try signing up with a new one.
+		</div>
+		</center>
+@endif
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-10">

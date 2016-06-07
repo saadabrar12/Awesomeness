@@ -3,6 +3,17 @@
 @section('title','Create New Event')
 
 @section('Contents')
+
+
+@if($info == 'EventExists')
+    <center>
+    <div class="alert alert-warning">
+     <strong>Warning!</strong> Event Already Exists!!! 
+    </div>
+    </center>
+@endif
+
+
 <center>
 	<form class="form-horizontal" action="{{ url('/').'/Events' }}" method="POST">
 <fieldset>

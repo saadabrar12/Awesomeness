@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Session;
+
 use App\Http\Requests;
 
 use App\Event_type;
@@ -90,7 +92,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('Events.CreateEvent',['Event_type'=>Event_type::all()]);
+        return view('Events.CreateEvent',['Event_type'=>Event_type::all(),'info'=>'Nothing']);
     }
 
     /**
@@ -118,6 +120,21 @@ class EventController extends Controller
         $event->Event_date = $request->get('Event_Starting_Date');
         $event->Donations = $request->get('Donation');
         $event->Event_name = $request->get('Event_Version');
+        
+
+
+        //error checking
+        $Events = Events::all();
+        foreach ($Events as $Event){
+            if($event->Event_type_id == $Event->Event_type_id && $event->Event_name == $Event->Event_name){
+                //return "GOOD";
+                //Session::put('info','EventExists');
+                return view('Events.CreateEvent',['info'=>'EventExists','Event_type'=>Event_type::all()]);
+            }
+        }
+
+
+
         $event->Ongoing = 1;
         $event->Venue = $request->get('Venue');
 

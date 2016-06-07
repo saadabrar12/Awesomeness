@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Waiting_for_aprroval;
@@ -32,7 +34,6 @@ use App\Participation;
 
 use DB;
 
-use Session;
 
 
 class UsersController extends Controller
@@ -153,8 +154,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        //$request->session()->put('info', 'nothing');
         return view('Users.create',['info'=>'Nothing']);
     }
 
@@ -202,6 +204,13 @@ class UsersController extends Controller
         foreach ($user_name_check_row as $user) {
             if($user->name == $temporary_user->Username)
             {
+                return view('Users.create',['info'=>'Failed']);
+            }
+        }
+        $user_name_check_row = Waiting_for_aprroval::all();
+
+        foreach ($user_name_check_row as $user) {
+            if($user->Username == $temporary_user->Username){
                 return view('Users.create',['info'=>'Failed']);
             }
         }
@@ -277,7 +286,8 @@ class UsersController extends Controller
             return redirect('/');
         }
         else{
-		    return 'wrong creds';
+//            return "Bhaloi";
+		    return redirect()->back()->with('info','LoginFailed');
 	    }
         //echo $request['username'];
         //echo $request['password'];
