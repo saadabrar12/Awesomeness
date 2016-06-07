@@ -145,7 +145,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('Users.create');
+        return view('Users.create',['info'=>'Nothing']);
     }
 
     /**
@@ -167,6 +167,16 @@ class UsersController extends Controller
         }
 
         $temporary_user->Username = $request->get('Username');
+        //Handling Username
+        $user_name_check_row = users::all();
+        foreach ($user_name_check_row as $user) {
+            if($user->name == $temporary_user->Username)
+            {
+                return view('Users.create',['info'=>'Failed']);
+            }
+        }
+
+
         //return $request->get('password');
         $temporary_user->Password = \Hash::make($request->get('password'));
         $temporary_user->First_name = $request->get('First_name');
@@ -178,7 +188,7 @@ class UsersController extends Controller
 
         $temporary_user->save();
 
-        return redirect('/Users/create')->with('info', 'it is empty');
+        return view('Users.create',['info'=>'Successful']);
 
 
     }

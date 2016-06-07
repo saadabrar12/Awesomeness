@@ -4,8 +4,8 @@
 
 @section('Contents')
 
-	@if(session()->has('info'))
-		SUCCESS!
+	@if($info == 'Failed')
+		SHEI
 	@endif
 
 		<div class="col-md-1">
