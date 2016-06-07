@@ -16,8 +16,19 @@ use App\Volunteers;
 
 use App\Campus;
 
+<<<<<<< HEAD
 use App\Event_type;
 
+=======
+use App\Events;
+
+use App\Event_type;
+
+use App\Waiting_for_joining_Event;
+
+use App\Participation;
+
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 use DB;
 
 class AdminController extends Controller
@@ -102,4 +113,31 @@ class AdminController extends Controller
     	return redirect('memberrequests');
     }
 
+<<<<<<< HEAD
+=======
+    public function showVolunteeringRequests(){
+        return view('Admin.VolunteerRequests',['Req'=>Waiting_for_joining_Event::all(),'Events'=>Events::all(),'Event_types'=>Event_type::all(),'Users'=>users::all()]);
+    }
+    public function acceptVolunteer($volunteer_id){
+        $Requests = DB::table('Waiting_for_joining_event')->where('Volunteer_id','=',$volunteer_id)->get();
+        $participation = new Participation;
+        
+     //   foreach ($campus_row as $row) {
+      //      $new_camp_id= $row->Campus_id;
+        //}
+
+        foreach ($Requests as $request) {
+                      
+                            
+            $participation->Volunteer_id = $request->Volunteer_id;
+            $participation->Event_id = $request->Event_id; 
+            $participation->Department_id = 1;
+            $participation->Rating = 0;
+            //$Requests->delete();
+            $participation->save();
+            $Request_delete = DB::table('Waiting_for_joining_event')->where('Volunteer_id','=',$volunteer_id)->delete();   
+            return redirect('volunteerRequests');
+        }
+    }
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 }

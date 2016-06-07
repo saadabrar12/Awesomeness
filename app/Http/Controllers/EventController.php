@@ -10,8 +10,19 @@ use App\Event_type;
 
 use App\Events;
 
+<<<<<<< HEAD
 use DB;
 
+=======
+use App\Participation;
+
+use DB;
+
+use App\users;
+
+use App\Department;
+
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 class EventController extends Controller
 {
     /**
@@ -19,6 +30,7 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function get_event_type_name($Event_type_name){
         $Event_id_array = DB::table('Event_type')->where('Event_name','=',$Event_type_name)->get();
 
@@ -30,6 +42,61 @@ class EventController extends Controller
         }
     }
 
+=======
+
+    public function showEventVolunteers($event_id){
+        $Event_id1 = Events::find($event_id)->Event_id; 
+        $participants = DB::table('Participation')->where('Event_id','=',$Event_id1)->get();
+
+        //dd($participants);
+        return view('Events.showEventVolunteers',['Events'=>Events::find($event_id),'Event_types'=>Event_type::all(),'Users'=>users::all(),'Req'=>$participants]);
+    }
+    
+    public function Allocation($event_id,$volunteer_id){
+        //return 1;
+        //dd($volunteer_id);
+        $participants = DB::table('Participation')->where([
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
+        ])->get();
+        
+        //dd($participants);
+        $member = DB::table('users')->where('User_type','=','1')->get();
+        
+        return view('Events.Allocation',['participant'=>$participants,'Department'=>Department::all(),'Members'=>$member,'Users'=>users::all(),'Event'=>$event_id,'Volunteer'=>$volunteer_id]);
+    }
+
+    public function postAllocation($event_id, $volunteer_id,Request $request){
+        $member_id= $request->get('Members');
+        $Department_name = $request->get('Department');
+
+        //dd($member_name);
+        //$Member_name = DB::table('users')
+
+        $Dept_name = DB::table('Department')->where('Department_name','=',$Department_name)->get();
+        //dd($Dept_name);
+        
+        foreach ($Dept_name as $dept_row) {
+            DB::table('Participation')
+                ->where('Volunteer_id',$volunteer_id)
+                ->update(['Department_id' => $dept_row->Department_id,'Supervisor_id'=>$member_id]);
+        
+            return redirect('/Events/AllEvents');
+        }
+
+    }
+
+    public function disapprove($event_id, $volunteer_id){
+        $deletedRows = Participation::where([
+            ['Volunteer_id', $volunteer_id],
+            ['Event_id',$event_id],
+            ])->delete();
+        
+            return redirect('/Events/AllEvents');
+    }
+
+
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     public function index()
     {
         return view('Events.EventHome');
@@ -136,9 +203,25 @@ class EventController extends Controller
         $event->Ongoing = $request->get('Ongoing');
         $event->Venue = $request->get('Venue');
 
+<<<<<<< HEAD
         $event->save();
         return redirect('/Events/AllEvents')->with('info','Updated');
         
+=======
+        DB::table('Events')
+            ->where('Event_id',$id)
+            ->update([
+                'Event_type_id' => $event->Event_type_id,
+                'Event_date'=>$event->Event_date,
+                'Donations'=>$event->Donations,
+                'Event_name'=>$event->Event_name,
+                'Ongoing'=>$event->Ongoing,
+                'Venue'=>$event->Venue
+            ]);
+
+        //$event->save();
+        return redirect('/Events/AllEvents')->with('info','Updated');   
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     }
 
     /**

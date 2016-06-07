@@ -10,8 +10,26 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Waiting_for_aprroval;
 
+<<<<<<< HEAD
 use Session;
 
+=======
+use App\Event_type;
+
+use App\Events;
+
+use App\users;
+
+use App\Volunteers;
+
+use App\Participation;
+
+use DB;
+
+use Session;
+
+
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 class UsersController extends Controller
 {
     /**
@@ -19,6 +37,106 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
+=======
+
+    public function showVolunteersUnderMe($id){
+        $participation = new Participation;
+        //dd($id);
+        $VolunteersWorkingUnderMe = DB::table('Participation')
+            ->where('Supervisor_id','=',$id)->get();
+        //dd($VolunteersWorkingUnderMe);
+        return view('Users.RateVolunteers',[
+                'Participants'=>$VolunteersWorkingUnderMe,
+                'Event_type' => Event_type::all(),
+                'Events' => Events::all(),
+                'Users'=>users::all()
+            ]);
+        //return 'something';
+    }
+
+    public function Rate($event_id, $volunteer_id){
+        $Participant = DB::table('Participation')->where([
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
+        ])->get();        //dd($Participant);
+        $user_row = users::find($volunteer_id);
+        $volunteer_name = $user_row->name;
+        //dd($volunteer_name);
+        $Event_row = Events::find($event_id);
+        $Event_type_row = Event_type::all();
+
+        foreach ($Event_type_row as $event_type ) {
+            if($event_type->Event_type_id == $Event_row->Event_type_id){
+                $Event_name = $event_type->Event_name;
+            }
+        }
+
+
+
+        //dd($Event_name);
+        $Event_Version = $Event_row->Event_name;
+        //dd($Event_Version);
+        
+        //dd($Participant);
+        
+        return view('Users.Rate',[
+            'participant'=>$Participant,
+            'Volunteer_id'=>$volunteer_id,
+            'Event_id'=>$event_id,
+            'volunteer_name'=>$volunteer_name,
+            'Event_name'=>$Event_name,
+            'Event_Version'=>$Event_Version
+        ]);
+    }
+
+    public function RatePost($event_id,$volunteer_id,Request $request){
+        $Rate = $request->get('Rate');
+        DB::table('Participation')
+            ->where([
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
+            ])
+            ->update(['Rating'=>$Rate])
+            ;
+
+        $number_of_events = DB::table('Participation')
+                            ->where('Volunteer_id',$volunteer_id)->get();
+
+        //$number_of_events = count($number_of_events);
+
+        $Volunteer = Volunteers::find($volunteer_id);
+        //$current_rating = $Volunteer->Average_rating;
+
+
+        $participants = DB::table('Participation')
+                        ->where('Volunteer_id','=',$volunteer_id)->get();
+
+        $total_rating = 0;
+        $count = 0;
+        foreach ($participants as $participant ) {
+            $count++;
+            $total_rating+=$participant->Rating;
+        }
+
+        //dd($total_rating);
+        $current_rating= ($total_rating)/($count);
+        //$current_rating = $current_rating*($number_of_events-1)+$Rate;
+
+        //$current_rating = $current_rating/$number_of_events;
+
+
+        DB::table('Volunteer')
+            ->where('Volunteer_id',$volunteer_id)
+            ->update([
+                    'Average_rating'=>$current_rating
+                ]);
+        
+        //dd($number_of_events);
+        //dd($Rate);
+        return redirect('/');
+    }
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     public function getMain(){
         return view('Main');
     }
@@ -35,7 +153,11 @@ class UsersController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         return view('Users.create');
+=======
+        return view('Users.create',['info'=>'Nothing']);
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
     }
 
     /**
@@ -57,6 +179,19 @@ class UsersController extends Controller
         }
 
         $temporary_user->Username = $request->get('Username');
+<<<<<<< HEAD
+=======
+        //Handling Username
+        $user_name_check_row = users::all();
+        foreach ($user_name_check_row as $user) {
+            if($user->name == $temporary_user->Username)
+            {
+                return view('Users.create',['info'=>'Failed']);
+            }
+        }
+
+
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
         //return $request->get('password');
         $temporary_user->Password = \Hash::make($request->get('password'));
         $temporary_user->First_name = $request->get('First_name');
@@ -68,7 +203,11 @@ class UsersController extends Controller
 
         $temporary_user->save();
 
+<<<<<<< HEAD
         return redirect('/Users/create')->with('info', 'it is empty');
+=======
+        return view('Users.create',['info'=>'Successful']);
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 
 
     }

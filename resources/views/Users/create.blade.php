@@ -4,8 +4,13 @@
 
 @section('Contents')
 
+<<<<<<< HEAD
 	@if(session()->has('info'))
 		SUCCESS!
+=======
+	@if($info == 'Failed')
+		openmodal();
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 	@endif
 
 		<div class="col-md-1">
@@ -109,7 +114,11 @@
 					<div class="form-group">
 					  <label class="col-md-4 control-label" for=""></label>
 					  <div class="col-md-4">
+<<<<<<< HEAD
 					    <button id="" name="" class="btn btn-info" type="submit">Sign Up</button>
+=======
+					    <button id="" name="button" class="btn btn-info" type="submit">Sign Up</button>
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 					  </div>
 					</div>
 
@@ -119,5 +128,27 @@
 		</div>
 		<div class="col-md-1">
 		</div>
+<<<<<<< HEAD
+=======
+		<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Invalid Username</h4>
+      </div>
+      <div class="modal-body">
+        <p>Username must be unique</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+>>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 		
 @stop

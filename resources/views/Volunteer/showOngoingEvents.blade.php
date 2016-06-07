@@ -1,26 +1,20 @@
 @extends('layouts.master1')
 
-@section('title','View and Edit Events')
+@section('title','Ongoing Events')
 
 @section('Contents')
 	<center>
 	<legend>Events List</legend>
-	<table cellpadding="5" cellspacing="0" border="1">
+	<table class="table-hover" cellpadding="5" cellspacing="0" border="1">
 		<th> Event Id</th>
 		<th> Event Name </th>
 		<th> Event Version </th>
 		<th>  Donations </th>
 		<th>  Venue </th>
-
-		<th> Ongoing </th>
 		<th> Action </th>
-<<<<<<< HEAD
-=======
-		<th> Volunteer List </th>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 		
 		<tbody>
-			@foreach($Events as $Event)
+			@foreach($Ongoing_events as $Event)
 			<tr>
 
 				<td>
@@ -52,36 +46,16 @@
 						{{ $Event->Venue}}
 					</center>
 				</td>
-				<td>
-					<center>
-					@if ($Event->Ongoing)
-						Yes
-					@else 
-						No 
-					@endif
-					</center>
-				</td>
 				
 				<td>
-				<form action="{{url('/').'/Events/'.$Event->Event_id.'/edit'}}">
+				<form action="{{ url('/').'/Volunteers/'.$Event->Event_id.'/'.Auth::user()->id.'/register'}}" method="POST">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<button type="submit" name="submitLogin" class="btn btn-default" >
-						Edit
+						Register
 					</button>
 				</form>
 				
 				</td>
-<<<<<<< HEAD
-=======
-				<td>
-					<form action="{{url('/').'/Events/'.$Event->Event_id.'/volunteerList'}}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="submitLogin" class="btn btn-default" >
-							Show Volunteer List
-						</button>
-					</form>
-				</td>
->>>>>>> 57c1c68c6aa9b28b0f513d896fa4db7a15fae756
 			</tr>
 			@endforeach
 		</tbody>
