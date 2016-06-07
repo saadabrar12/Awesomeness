@@ -16,6 +16,8 @@ use App\Events;
 
 use App\users;
 
+use App\Volunteers;
+
 use App\Participation;
 
 use DB;
@@ -47,15 +49,86 @@ class UsersController extends Controller
     }
 
     public function Rate($event_id, $volunteer_id){
-        $Participant = Participation::where([
-            ['Volunteer_id', $volunteer_id],
-            ['Event_id',$event_id],
-            ])->get();
-        dd($Participant);
+        $Participant = DB::table('Participation')->where([
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
+        ])->get();        //dd($Participant);
+        $user_row = users::find($volunteer_id);
+        $volunteer_name = $user_row->name;
+        //dd($volunteer_name);
+        $Event_row = Events::find($event_id);
+        $Event_type_row = Event_type::all();
+
+        foreach ($Event_type_row as $event_type ) {
+            if($event_type->Event_type_id == $Event_row->Event_type_id){
+                $Event_name = $event_type->Event_name;
+            }
+        }
+
+
+
+        //dd($Event_name);
+        $Event_Version = $Event_row->Event_name;
+        //dd($Event_Version);
         
-        return view('Users.Rate');
+        //dd($Participant);
+        
+        return view('Users.Rate',[
+            'participant'=>$Participant,
+            'Volunteer_id'=>$volunteer_id,
+            'Event_id'=>$event_id,
+            'volunteer_name'=>$volunteer_name,
+            'Event_name'=>$Event_name,
+            'Event_Version'=>$Event_Version
+        ]);
     }
 
+    public function RatePost($event_id,$volunteer_id,Request $request){
+        $Rate = $request->get('Rate');
+        DB::table('Participation')
+            ->where([
+                ['Volunteer_id','=',$volunteer_id],
+                ['Event_id','=',$event_id],
+            ])
+            ->update(['Rating'=>$Rate])
+            ;
+
+        $number_of_events = DB::table('Participation')
+                            ->where('Volunteer_id',$volunteer_id)->get();
+
+        //$number_of_events = count($number_of_events);
+
+        $Volunteer = Volunteers::find($volunteer_id);
+        //$current_rating = $Volunteer->Average_rating;
+
+
+        $participants = DB::table('Participation')
+                        ->where('Volunteer_id','=',$volunteer_id)->get();
+
+        $total_rating = 0;
+        $count = 0;
+        foreach ($participants as $participant ) {
+            $count++;
+            $total_rating+=$participant->Rating;
+        }
+
+        //dd($total_rating);
+        $current_rating= ($total_rating)/($count);
+        //$current_rating = $current_rating*($number_of_events-1)+$Rate;
+
+        //$current_rating = $current_rating/$number_of_events;
+
+
+        DB::table('Volunteer')
+            ->where('Volunteer_id',$volunteer_id)
+            ->update([
+                    'Average_rating'=>$current_rating
+                ]);
+        
+        //dd($number_of_events);
+        //dd($Rate);
+        return redirect('/');
+    }
     public function getMain(){
         return view('Main');
     }
@@ -102,7 +175,7 @@ class UsersController extends Controller
         $temporary_user->Phone_number = $request->get('Phone_number');
         $temporary_user->Email_address = $request->get('Email_address');
         $temporary_user->Campus_name = $request->get('Campus_name'); 
-        
+
         $temporary_user->save();
 
         return redirect('/Users/create')->with('info', 'it is empty');

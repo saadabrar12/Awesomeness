@@ -65,7 +65,7 @@
 				@endforeach
 
 					<td>
-					<form action="">
+					<form action="{{url('/').'/Events/'.$par->Event_id.'/'.$par->Volunteer_id.'/Rate'  }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<button type="submit" name="submitLogin" class="btn btn-default" method="GET" >
 							Rate		

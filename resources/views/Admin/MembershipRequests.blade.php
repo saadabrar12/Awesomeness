@@ -11,8 +11,8 @@
 		<th> Requested User Id</th>
 		<th> Name </th>
 		<th> First Name</th>
-		<th>  Last name </th>
-		<th>  Date of Birth </th>
+		<th> Last name </th>
+		<th> Date of Birth </th>
 		<th> User Type </th>
 		<th> Phone Number </th>
 		<th> Email Address </th>

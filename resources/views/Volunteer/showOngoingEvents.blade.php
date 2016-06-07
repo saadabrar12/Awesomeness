@@ -5,7 +5,7 @@
 @section('Contents')
 	<center>
 	<legend>Events List</legend>
-	<table cellpadding="5" cellspacing="0" border="1">
+	<table class="table-hover" cellpadding="5" cellspacing="0" border="1">
 		<th> Event Id</th>
 		<th> Event Name </th>
 		<th> Event Version </th>

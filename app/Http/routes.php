@@ -46,10 +46,12 @@ Route::group(['middleware' => ['web']],function(){
 		
 	Route::get('/Events/{event_id}/{volunteer_id}/Allocation','EventController@Allocation');
 	Route::post('/Events/{event_id}/{volunteer_id}/postAllocation','EventController@postAllocation');
+	
 	Route::post('/Events/{event_id}/{volunteer_id}/disapprove','EventController@disapprove');
 
 	Route::get('/member/{id}/showVolunteersUnderMe','UsersController@showVolunteersUnderMe');
-	Route::get('/Events/{event_id}/{volunteer_id}/Rate','EventController@Rate');
+	Route::get('/Events/{event_id}/{volunteer_id}/Rate','UsersController@Rate');
+	Route::post('/Events/{event_id}/{volunteer_id}/RatePost','UsersController@RatePost');
 	
 	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
 

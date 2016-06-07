@@ -146,19 +146,22 @@
                   <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="active">
-                  <a href="#">Upcoming Events</a>
+                  <a href="">Upcoming Events</a>
                 </li>
                 <li class="active">
                   <a href="#">News</a>
                 </li>
                 <li class="active">
-                  <a href="#">About us</a>
+                  <a href="{{ url('/member/'.Auth::user()->id.'/showVolunteersUnderMe') }}">Volunteers Under Me</a>
                 </li>
                 <li class="dropdown pull-right">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
                         <a href="{{ url('/memberrequests') }}">Membership Requests</a>
+                      </li>
+                      <li>
+                        <a href="{{ url('/volunteerRequests') }}">Volunteer Requests</a>
                       </li>
                       <li>
                         <a href="{{ url('/Events') }}">Events</a>
@@ -179,7 +182,7 @@
                         <a href="{{ url('/') }}">Home</a>
                      </li>
                      <li class="active">
-                        <a href="#">Upcoming Events</a>
+                        <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Upcoming Events</a>
                      </li>
                      <li class="active">
                         <a href="#">News</a>
@@ -192,9 +195,6 @@
                     <ul class="dropdown-menu">
                       <li>
                         <a href="{{ url('/memberrequests') }}">Membership Requests</a>
-                      </li>
-                      <li>
-                        <a href="#">Another action</a>
                       </li>
                       <li>
                         <a href="#">Something else here</a>
