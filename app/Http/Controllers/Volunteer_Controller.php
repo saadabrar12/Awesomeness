@@ -39,7 +39,7 @@ class Volunteer_Controller extends Controller
     	   return view('Volunteer.showOngoingEvents',['info'=>'Register Requested']);
         }
         else{
-            return redirect('/')->with('info'=>'Already Registered')
+            return redirect()->route('',['info'=>'Already Registered']);
         }
     }
 

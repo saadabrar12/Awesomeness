@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']],function(){
 
 
 	Route::get('/',function(){
-		return view('Main');
+		return view('Main',['info'=>'Nothing']);
 	});
 	Route::get('/Events/AllEvents','EventController@showAllEvents');
 
@@ -64,7 +64,7 @@ Route::group(['middleware' => ['web']],function(){
 	Route::post('Volunteers/{event_id}/{volunteer_id}/register','Volunteer_Controller@Register');
 	
 
-	//Route::get('test', function(){return view('test');});
+	Route::get('test', function(){return view('test');});
 	
 
 	

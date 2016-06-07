@@ -14,7 +14,7 @@ Volunteer Name:
 @foreach($participant as $par)
 	@foreach($Users as $user)
 		@if($user->id == $par->Volunteer_id)
-			{{  $user->name }}
+			{{  $user->name  }}
 		@endif
 	@endforeach
 @endforeach
