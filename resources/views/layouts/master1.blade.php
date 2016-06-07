@@ -15,6 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/cosmo/bootsrap.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/TableCSSCode.css') }}">
+    <script type="text/javascript">
+function openModal() {
+    $('#myModal').modal('show');
+}
+</script>
   </head>
   <body>
        <div class="container-fluid">

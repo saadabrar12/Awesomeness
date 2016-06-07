@@ -5,7 +5,7 @@
 @section('Contents')
 
 	@if($info == 'Failed')
-		$('#myModal').modal('show');
+		openmodal();
 	@endif
 
 		<div class="col-md-1">
