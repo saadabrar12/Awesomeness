@@ -7,34 +7,13 @@ function openModal() {
 @section('title','Sign Up')
 
 @section('Contents')
-	@if (count($errors) > 0)
-	<?php echo "error!" ?>
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-<!--	@if($info == 'Failed')
-		
-
-<a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
-		<script>
-			jQuery.noConflict(); 
-              $('#myModal').modal(show);
-         	
-    </script>
--->
-	@if($info == 'Failed')
+@if($info == 'Failed')
 		<center>
 		<div class="alert alert-warning">
  		 <strong>Warning!</strong> User name Already Exists. Try signing up with a new one.
 		</div>
 		</center>
-@endif
+	@endif
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-10">
@@ -146,24 +125,6 @@ function openModal() {
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div id="myModal" class="modal hide fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Invalid Username</h4>
-      </div>
-      <div class="modal-body">
-        <p>Username must be unique</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+	
 		
 @stop

@@ -39,6 +39,7 @@ Route::group(['middleware' => ['web']],function(){
 			return redirect('/');
 	});
 
+
 	Route::get('/memberrequests','AdminController@showMembershipRequests');
 	Route::get('/volunteerRequests','AdminController@showVolunteeringRequests');
 
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/member/{id}/showVolunteersUnderMe','UsersController@showVolunteersUnderMe');
 	Route::get('/Events/{event_id}/{volunteer_id}/Rate','UsersController@Rate');
 	Route::post('/Events/{event_id}/{volunteer_id}/RatePost','UsersController@RatePost');
+	Route::get('/Users/{id}/Profile','UsersController@ShowProfile');
 	
 	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
 

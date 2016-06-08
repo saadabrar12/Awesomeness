@@ -43,6 +43,18 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function ShowProfile($id){
+        $user = users::find($id);
+        if($user->User_type == 0){
+            $Event_worked = DB::table('Participation')
+                ->where('Volunteer_id',$id)->get();
+            return view('Users.Profile',['User'=>$user,'Par'=>$Event_worked,'Event_type'=>Event_type::all(),'Events'=>Events::all()]);
+        }
+
+
+        return view('Users.Profile',['User'=>$user]);
+
+    }
 
     public function showVolunteersUnderMe($id){
         $participation = new Participation;
