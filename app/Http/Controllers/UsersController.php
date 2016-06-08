@@ -50,6 +50,19 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function ShowProfile($id){
+        $user = users::find($id);
+        if($user->User_type == 0){
+            $Event_worked = DB::table('Participation')
+                ->where('Volunteer_id',$id)->get();
+            $rating = Volunteers::find($id);
+            return view('Users.Profile',['User'=>$user,'Par'=>$Event_worked,'Event_type'=>Event_type::all(),'Events'=>Events::all(),'Rating'=>$rating->Average_rating]);
+        }
+
+
+        return view('Users.Profile',['User'=>$user]);
+
+    }
 
     public function showVolunteersUnderMe($id){
         $participation = new Participation;
@@ -102,6 +115,19 @@ class UsersController extends Controller
     }
 
     public function RatePost($event_id,$volunteer_id,Request $request){
+            $validator = Validator::make($request->all(), [
+
+        
+        'Rate' => 'required|between:1,10'
+    ]);
+         //dd($request->all());
+
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+    };
+     
         $Rate = $request->get('Rate');
         DB::table('Participation')
             ->where([
@@ -177,11 +203,13 @@ class UsersController extends Controller
     {
         //var_dump($request->session()->all());
          $validator = Validator::make($request->all(), [
+
+        
         'Username' => 'required|between:5,20',
         //'Password'=> 'required|alpha_dash|min: 6',
         'First_name'=>'required|alpha',
         'Last_name' => 'required|alpha',
-        'Date_of_birth' => 'required|date|before: ' . date('2003-1-1') . '|date_format:Y-m-d|after: ' .date('1980-1-1') . '| date_format: Y-m-d',
+        'Date_of_birth' => 'required|date|before: ' . date('2003-01-01') . '|date_format:Y-m-d|after: ' .date('1980-01-01') . '| date_format: Y-m-d',
 
         'Phone_number' => 'required|numeric|min: 11',
         'Email_address' => 'required|email',
@@ -194,7 +222,7 @@ class UsersController extends Controller
         return redirect('/Users/create')
             ->withInput()
             ->withErrors($validator);
-    }
+    };
         
         $temporary_user = new Waiting_for_aprroval;
         
@@ -300,6 +328,6 @@ class UsersController extends Controller
         //echo $request['username'];
         //echo $request['password'];
         //return "Failed";
-        return redirect()->back();
+        //return redirect()->back();
     }
 }

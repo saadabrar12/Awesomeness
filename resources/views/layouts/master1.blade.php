@@ -15,12 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/cosmo/bootsrap.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/TableCSSCode.css') }}">
-    <script type="text/javascript">
-function openModal() {
-    $('#myModal').modal('show');
-}
-</script>
-
+  
   </head>
   <body>
        <div class="container-fluid">
@@ -86,14 +81,12 @@ function openModal() {
                           <div>
                           <ul class="nav nav-tabs">
                                       <li class="dropdown pull-right">
-                                             <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 20px" ><b>{{ Auth::user()->name }} <strong class="caret"></strong> </b>
+                                      <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 20px" ><b>{{ Auth::user()->name }} <strong class="caret"></strong> </b>
                                              </a>
 
                                              <ul class="dropdown-menu" role="menu">
                                                   <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                                  <li>
-                                    <a href="#">Action</a>
-                                  </li>
+                                                  
                                              </ul>
                                           </li>
                                     </ul>
@@ -116,47 +109,25 @@ function openModal() {
                   <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="active">
-                  <a href="#">Register Here!</a>
+                  <a href="{{url('Users/create')}}">Register Here!</a>
                 </li>
                 <li class="active">
-                  <a href="#">News</a>
+                  <a href="{{url('/UpcomingEvents')}} ">Upcoming Events</a>
                 </li>
                 <li class="active">
-                  <a href="#">About us </a>
+                  <a href="{{ url('/').'/about' }}">About us </a>
                 </li>
-                <li class="active">
-                  <a href="#">Donate </a>
-                </li>
-                <li class="dropdown pull-right">
-                   <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="#">Action</a>
-                    </li>
-                    <li>
-                      <a href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a href="#">Something else here</a>
-                    </li>
-                    <li class="divider">
-                    </li>
-                    <li>
-                      <a href="#">Separated link</a>
-                    </li>
-                  </ul>
-                </li>
+                
           @else
               @if(Auth::user()->User_type==1) 
                 <li class="active">
                   <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="active">
-
-                  <a href="">Upcoming Events</a>
+                        <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                 </li>
                 <li class="active">
-                  <a href="#">News</a>
+                  <a href="{{ url('/').'/about' }}">About us </a>
                 </li>
                 <li class="active">
                   <a href="{{ url('/member/'.Auth::user()->id.'/showVolunteersUnderMe') }}">Volunteers Under Me</a>
@@ -164,22 +135,28 @@ function openModal() {
                 <li class="dropdown pull-right">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
-                      <li>
-                        <a href="{{ url('/memberrequests') }}">Membership Requests</a>
-                      </li>
+                        @if(Auth::user()->Privilege_level == 1)
+                        <li>
+                        <a href="{{ url('/memberrequests') }}">Account Requests</a>
+                        <li class="divider">
+                        </li>
+
+                        <li>
+                          <a href="{{url('/').'/Admin/AllMembers'}}">
+                            Member List
+                          </a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        @endif
+                      
+
                       <li>
                         <a href="{{ url('/volunteerRequests') }}">Volunteer Requests</a>
                       </li>
+                      <li class="divider">
                       <li>
                         <a href="{{ url('/Events') }}">Events</a>
-                      </li>
-                      <li>
-                        <a href="#">Something else here</a>
-                      </li>
-                      <li class="divider">
-                      </li>
-                      <li>
-                        <a href="#">Separated link</a>
                       </li>
                     </ul>
                   </li>
@@ -189,26 +166,20 @@ function openModal() {
                         <a href="{{ url('/') }}">Home</a>
                      </li>
                      <li class="active">
-                        <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Upcoming Events</a>
+                        <a href="{{url('/').'/UpcomingEvents'}}">Upcoming Events</a>
                      </li>
                      <li class="active">
-                        <a href="#">News</a>
+                        <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                       </li>
                      <li class="active">
-                        <a href="#">About us</a>
+                      <a href="{{ url('/').'/about' }}">About us </a>
+                     </li>
                      </li>
                      <li class="dropdown pull-right">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a href="{{ url('/memberrequests') }}">Membership Requests</a>
-                      </li>
-                        <a href="#">Something else here</a>
-                      </li>
-                      <li class="divider">
-                      </li>
-                      <li>
-                        <a href="#">Separated link</a>
+                        <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Register for Ongoing Events</a>
                       </li>
                     </ul>
                   </li>
@@ -228,10 +199,11 @@ function openModal() {
             @yield('Extra_info')
         </div>
     </div>
-       <script src="js/scripts.js"/>
+
    
     
-  <script src="JavaScript/jquery.js" />
-<script src="JavaScript/bootstrap-min.js" />
-  </body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">  
+</body>
 </html>

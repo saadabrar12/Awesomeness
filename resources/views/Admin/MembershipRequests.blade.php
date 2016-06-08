@@ -4,7 +4,7 @@
 
 @section('Contents')
 
-@if(Auth::user()->User_type == 1)
+@if(Auth::user()->Privilege_level == 1)
 <center>
 	<legend>Pending Requests</legend>
 	<table cellpadding="5" cellspacing="0" border="1">

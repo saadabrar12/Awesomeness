@@ -3,8 +3,7 @@
 @section('title','Create New Event')
 
 @section('Contents')
-
-
+@if(Auth::user()->User_type == 1)
 @if($info == 'EventExists')
     <center>
     <div class="alert alert-warning">
@@ -82,4 +81,6 @@
 </form>
 </center>
 
+
+@endif
 @stop

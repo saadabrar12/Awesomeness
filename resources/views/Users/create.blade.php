@@ -3,8 +3,10 @@
 @section('title','Sign Up')
 
 @section('Contents')
-	@if (count($errors) > 0)
+
+@if (count($errors) > 0)
     <!-- Form Error List -->
+    <center>
     	<div class="alert alert-danger">
         	<strong>Whoops! Something went wrong!</strong>
 
@@ -16,25 +18,24 @@
             @endforeach
         </ul>
     </div>
+    </center>
+@endif
+		
+@if($info == 'Successful')
+	<center>
+		<div class="alert alert-success">
+			<strong>Congratulations!</strong> Your request has been successfully processed. Wait for Approval to continue.
+		</div>
+	</center>
 @endif
 
-	@if(!$info)
-		
-
-<a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
-		<script>
-			jQuery.noConflict(); 
-              $("#myModal").modal("show");
-         	
-    </script>
-{{--
-	@if($info == 'Failed')
+@if($info == 'Failed')
 		<center>
 		<div class="alert alert-warning">
  		 <strong>Warning!</strong> User name Already Exists. Try signing up with a new one.
 		</div>
 		</center>
---}}
+
 @endif
 		<div class="col-md-1">
 		</div>
@@ -171,4 +172,6 @@ function openModal() {
     $('#myModal').modal('show');
 }
 </script>		
+	
+		
 @stop

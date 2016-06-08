@@ -6,7 +6,7 @@
 
 @if(Auth::user()->User_type == 1)
 <center>
-	<legend>Pending Membership Requests</legend>
+	<legend>Pending Volunteer Requests</legend>
 	<table cellpadding="5" cellspacing="0" border="1">
 		<th> Requested Volunteer Id</th>
 		<th> Name </th>
