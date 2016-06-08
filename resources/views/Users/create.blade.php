@@ -7,6 +7,14 @@ function openModal() {
 @section('title','Sign Up')
 
 @section('Contents')
+@if($info == 'Successful')
+	<center>
+		<div class="alert alert-success">
+			<strong>Congratulations!</strong> Your request has been successfully processed. Wait for Approval to continue.
+		</div>
+	</center>
+@endif
+
 @if($info == 'Failed')
 		<center>
 		<div class="alert alert-warning">

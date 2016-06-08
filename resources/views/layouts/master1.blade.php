@@ -111,7 +111,7 @@
                   <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="active">
-                  <a href="#">Register Here!</a>
+                  <a href="{{url('Users/create')}}">Register Here!</a>
                 </li>
                 <li class="active">
                   <a href="#">News</a>
@@ -119,36 +119,14 @@
                 <li class="active">
                   <a href="#">About us </a>
                 </li>
-                <li class="active">
-                  <a href="#">Donate </a>
-                </li>
-                <li class="dropdown pull-right">
-                   <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="#">Action</a>
-                    </li>
-                    <li>
-                      <a href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a href="#">Something else here</a>
-                    </li>
-                    <li class="divider">
-                    </li>
-                    <li>
-                      <a href="#">Separated link</a>
-                    </li>
-                  </ul>
-                </li>
+                
           @else
               @if(Auth::user()->User_type==1) 
                 <li class="active">
                   <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="active">
-
-                  <a href="">Upcoming Events</a>
+                        <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                 </li>
                 <li class="active">
                   <a href="#">News</a>
@@ -160,21 +138,18 @@
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
+                        @if(Auth::user()->Privilege_level == 1)
                         <a href="{{ url('/memberrequests') }}">Account Requests</a>
+                        <li class="divider">
+                        @endif
                       </li>
+
                       <li>
                         <a href="{{ url('/volunteerRequests') }}">Volunteer Requests</a>
                       </li>
+                      <li class="divider">
                       <li>
                         <a href="{{ url('/Events') }}">Events</a>
-                      </li>
-                      <li>
-                        <a href="#">Something else here</a>
-                      </li>
-                      <li class="divider">
-                      </li>
-                      <li>
-                        <a href="#">Separated link</a>
                       </li>
                     </ul>
                   </li>
@@ -187,7 +162,7 @@
                         <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Upcoming Events</a>
                      </li>
                      <li class="active">
-                        <a href="#">News</a>
+                        <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                       </li>
                      <li class="active">
                         <a href="#">About us</a>
@@ -196,8 +171,6 @@
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a href="{{ url('/memberrequests') }}">Membership Requests</a>
-                      </li>
                         <a href="#">Something else here</a>
                       </li>
                       <li class="divider">

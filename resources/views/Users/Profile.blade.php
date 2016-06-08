@@ -11,12 +11,20 @@
 			<h3>
 				<center>
 				@if($User->User_type == 0)
-					Volunteer
+					Volunteer 
 				@else 
 					Member
 				@endif
 				 {{ $User->name }}</center>			
 			</h3>
+			<center>
+			<em>
+				@if($User->User_type == 0)
+					Average Rating
+					{{ $Rating }}
+				@endif
+			</em>
+			</center>
 			<dl class="dl-horizontal">
 				<dt>
 					First Name

@@ -12,6 +12,8 @@ use App\users;
 
 use App\Members;
 
+use App\Rank;
+
 use App\Volunteers;
 
 use App\Campus;
@@ -28,6 +30,35 @@ use DB;
 
 class AdminController extends Controller
 {
+    public function PromotePost($member_id,Request $request){
+        $Rank_id = $request->get('Rank');
+        DB::table('Member')
+            ->where('Member_id',$member_id)
+            ->update([
+                'Rank_id'=>$Rank_id
+            ]);
+        return redirect('/');
+    }
+
+    public function PromoteMembers($Member_id){
+        $user = users::find($Member_id);
+        $username = $user->name;
+        if($user->Privilege_level == 1){
+            $Editable = false;
+        }
+        else{
+            $Editable = true;
+        }
+        $ranks = Rank::all();
+        return view('Admin.MemberPromote',['Ranks'=>$ranks,'Member_id'=>$Member_id
+            ,'Username'=>$username,'Editable'=>$Editable]);
+    }
+
+    public function viewAllMembers(){
+        $Members = Members::all();
+        $users = users::all();
+        return view('Admin.AllMembers',['Members'=>$Members,'users'=>$users]);
+    }
     public function showMembershipRequests()
     {
     	return view('Admin.MembershipRequests',['Req'=>Waiting_for_aprroval::all()]);

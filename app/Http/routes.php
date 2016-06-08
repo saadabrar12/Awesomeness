@@ -58,8 +58,13 @@ Route::group(['middleware' => ['web']],function(){
 	Route::post('/Admin/{id}/approve','AdminController@acceptMembership');
 
 	Route::post('/Admin/{volunteer_id}/approveVolunteer','AdminController@acceptVolunteer');
-	
+	Route::get('/Admin/AllMembers','AdminController@viewAllMembers');
+	Route::get('/Admin/{Member_id}/MemberPromote','AdminController@PromoteMembers');
+	Route::post('/Admin/{Member_id}/PromotePost','AdminController@PromotePost');
+
+
 	Route::post('/Admin/{id}/disapprove','AdminController@rejectMembership');
+
 
 	Route::get('Volunteers/ShowOngoingEvents','Volunteer_Controller@ShowOngoingEvents');
 

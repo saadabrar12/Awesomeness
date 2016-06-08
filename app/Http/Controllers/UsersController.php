@@ -48,7 +48,8 @@ class UsersController extends Controller
         if($user->User_type == 0){
             $Event_worked = DB::table('Participation')
                 ->where('Volunteer_id',$id)->get();
-            return view('Users.Profile',['User'=>$user,'Par'=>$Event_worked,'Event_type'=>Event_type::all(),'Events'=>Events::all()]);
+            $rating = Volunteers::find($id);
+            return view('Users.Profile',['User'=>$user,'Par'=>$Event_worked,'Event_type'=>Event_type::all(),'Events'=>Events::all(),'Rating'=>$rating->Average_rating]);
         }
 
 
@@ -181,12 +182,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         
-         $validator = Validator::make($request->all(), [
+        /* $validator = Validator::make($request->all(), [
         'Username' => 'required|between:5,20',
         'Password'=> 'required|alpha_dash|min: 6',
         'First_name'=>'required|alpha',
         'Last_name' => 'required|alpha',
-        'Date_of_birth' => 'required|date|before: ' . date('2003-1-1') . '|date_format:Y-m-d|after: ' .date('1980-1-1') . '| date_format: Y-m-d',
+        'Date_of_birth' => 'required|date|before: ' . date('1/1/2003') . '|date_format:m/d/Y|after: ' .date('1/1/1980') . '| date_format: m/d/Y',
 
         'Phone_number' => 'required|numeric|min: 11',
         'Email_address' => 'required|email',
@@ -198,7 +199,7 @@ class UsersController extends Controller
         return redirect('/Users/create')
             ->withInput()
             ->withErrors($validator);
-    }
+    }*/
         
         $temporary_user = new Waiting_for_aprroval;
         
@@ -304,6 +305,6 @@ class UsersController extends Controller
         //echo $request['username'];
         //echo $request['password'];
         //return "Failed";
-        return redirect()->back();
+        //return redirect()->back();
     }
 }
