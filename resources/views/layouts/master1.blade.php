@@ -112,7 +112,7 @@
                   <a href="{{url('Users/create')}}">Register Here!</a>
                 </li>
                 <li class="active">
-                  <a href="#">News</a>
+                  <a href="{{url('/UpcomingEvents')}} ">Upcoming Events</a>
                 </li>
                 <li class="active">
                   <a href="{{ url('/').'/about' }}">About us </a>
@@ -180,8 +180,6 @@
                     <ul class="dropdown-menu">
                       <li>
                         <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Register for Ongoing Events</a>
-                      </li>
-                      <li class="divider">
                       </li>
                     </ul>
                   </li>
