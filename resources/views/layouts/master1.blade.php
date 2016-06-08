@@ -86,9 +86,7 @@
 
                                              <ul class="dropdown-menu" role="menu">
                                                   <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                                  <li>
-                                                  <a href="#">Action</a>
-                                                  </li>
+                                                  
                                              </ul>
                                           </li>
                                     </ul>
@@ -117,7 +115,7 @@
                   <a href="#">News</a>
                 </li>
                 <li class="active">
-                  <a href="#">About us </a>
+                  <a href="{{ url('/').'/about' }}">About us </a>
                 </li>
                 
           @else
@@ -129,7 +127,7 @@
                         <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                 </li>
                 <li class="active">
-                  <a href="#">News</a>
+                  <a href="{{ url('/').'/about' }}">About us </a>
                 </li>
                 <li class="active">
                   <a href="{{ url('/member/'.Auth::user()->id.'/showVolunteersUnderMe') }}">Volunteers Under Me</a>
@@ -137,12 +135,21 @@
                 <li class="dropdown pull-right">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
-                      <li>
                         @if(Auth::user()->Privilege_level == 1)
+                        <li>
                         <a href="{{ url('/memberrequests') }}">Account Requests</a>
                         <li class="divider">
+                        </li>
+
+                        <li>
+                          <a href="{{url('/').'/Admin/AllMembers'}}">
+                            Member List
+                          </a>
+                        </li>
+                        <li class="divider">
+                        </li>
                         @endif
-                      </li>
+                      
 
                       <li>
                         <a href="{{ url('/volunteerRequests') }}">Volunteer Requests</a>
@@ -159,24 +166,22 @@
                         <a href="{{ url('/') }}">Home</a>
                      </li>
                      <li class="active">
-                        <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Upcoming Events</a>
+                        <a href="{{url('/').'/UpcomingEvents'}}">Upcoming Events</a>
                      </li>
                      <li class="active">
                         <a href="{{ url('/').'/Users/'.Auth::user()->id.'/Profile' }}">Profile</a>
                       </li>
                      <li class="active">
-                        <a href="#">About us</a>
+                      <a href="{{ url('/').'/about' }}">About us </a>
+                     </li>
                      </li>
                      <li class="dropdown pull-right">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Activities<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a href="#">Something else here</a>
+                        <a href="{{ url('/').'/Volunteers/ShowOngoingEvents' }}">Register for Ongoing Events</a>
                       </li>
                       <li class="divider">
-                      </li>
-                      <li>
-                        <a href="#">Separated link</a>
                       </li>
                     </ul>
                   </li>

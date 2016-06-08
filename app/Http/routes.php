@@ -25,6 +25,14 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/',function(){
 		return view('Main',['info'=>'Nothing']);
 	});
+
+	Route::get('/about',function(){
+		return view('About');
+	});
+
+	Route::get('/UpcomingEvents',function(){
+		return view('UpcomingEvents');
+	});
 	Route::get('/Events/AllEvents','EventController@showAllEvents');
 
 	Route::resource('Users','UsersController');
