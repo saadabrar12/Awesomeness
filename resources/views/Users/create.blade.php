@@ -1,15 +1,15 @@
 @extends('layouts.master1')
-<script type="text/javascript">
-function openModal() {
-    $('#myModal').modal('show');
-}
-</script>
+
 @section('title','Sign Up')
 
 @section('Contents')
 	@if (count($errors) > 0)
-	<?php echo "error!" ?>
-    <div class="alert alert-danger">
+    <!-- Form Error List -->
+    	<div class="alert alert-danger">
+        	<strong>Whoops! Something went wrong!</strong>
+
+        <br><br>
+
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -18,22 +18,23 @@ function openModal() {
     </div>
 @endif
 
-<!--	@if($info == 'Failed')
+	@if(!$info)
 		
 
 <a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
 		<script>
 			jQuery.noConflict(); 
-              $('#myModal').modal(show);
+              $("#myModal").modal("show");
          	
     </script>
--->
+{{--
 	@if($info == 'Failed')
 		<center>
 		<div class="alert alert-warning">
  		 <strong>Warning!</strong> User name Already Exists. Try signing up with a new one.
 		</div>
 		</center>
+--}}
 @endif
 		<div class="col-md-1">
 		</div>
@@ -165,5 +166,9 @@ function openModal() {
 
   </div>
 </div>
-		
+<script type="text/javascript">
+function openModal() {
+    $('#myModal').modal('show');
+}
+</script>		
 @stop

@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Auth;
 
+//use Illuminate\Validation\ValidationException;
+
+use Illuminate\Foundation\Validation\ValidationException;
+
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
+
 use App\Waiting_for_aprroval;
 
 use App\Event_type;
@@ -168,10 +175,10 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //var_dump($request->session()->all());
          $validator = Validator::make($request->all(), [
         'Username' => 'required|between:5,20',
-        'Password'=> 'required|alpha_dash|min: 6',
+        //'Password'=> 'required|alpha_dash|min: 6',
         'First_name'=>'required|alpha',
         'Last_name' => 'required|alpha',
         'Date_of_birth' => 'required|date|before: ' . date('2003-1-1') . '|date_format:Y-m-d|after: ' .date('1980-1-1') . '| date_format: Y-m-d',
@@ -181,6 +188,7 @@ class UsersController extends Controller
         'Campus_name' => 'required|alpha'
         //. date('Y-m-d') . '|date_format:Y-m-d',
     ]);
+         //dd($request->all());
 
     if ($validator->fails()) {
         return redirect('/Users/create')

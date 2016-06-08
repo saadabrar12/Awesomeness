@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Input;
 
 
 
-Route::group(['middleware' => ['web']],function(){
-
-
 //		Route::get('/SignUp',function(){
 //			return view('Users.SignUp');
 //		});
@@ -69,5 +66,4 @@ Route::group(['middleware' => ['web']],function(){
 
 	
 	
-});
 
